@@ -1,59 +1,120 @@
-import React from 'react';
 import { useRouter } from 'expo-router';
-import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  StatusBar,
+} from 'react-native';
+
+const imagemURL = {
+  uri: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop',
+};
 
 export default function HomeHBG() {
-    const routerHBG = useRouter();
+  const router = useRouter();
 
   return (
-    <View style={estilosHBG.containerHBG}>
-      <StatusBar barStyle="dark-content" />
+    <ImageBackground
+      source={imagemURL}
+      style={styles.container}
+      resizeMode="cover"
+    >
+      <StatusBar barStyle="light-content" />
 
-      <View style={estilosHBG.areaImagemHBG}>
-        <Image
-          source={require('../../assets/images/avatar-splash.png')}
-          style={estilosHBG.imagemHBG}
-          resizeMode="contain"
-        />
-      </View>
+      <View style={styles.conteudo}>
+        <View style={styles.areaTexto}>
+          <Text style={styles.titulo}>Herança & Memórias</Text>
+          <Text style={styles.subtitulo}>
+            Transforme seus momentos especiais em memórias inesquecíveis. Produtos exclusivos feitos com histórias de família!
+          </Text>
 
-      <View style={estilosHBG.areaTextoHBG}>
-        <Text style={estilosHBG.tituloHBG}>Mil possibilidades, um só lugar.</Text>
-        <Text style={estilosHBG.subtituloHBG}>
-          Explore diferentes personagens, descubra novos estilos e encontre seu próximo avatar favorito na Avatar Studio!
-        </Text>
+          <View style={styles.pontos}>
+            <View style={styles.ponto} />
+            <View style={styles.ponto} />
+            <View style={styles.pontoAtivo} />
+          </View>
 
-        <View style={estilosHBG.pontosHBG}>
-          <View style={estilosHBG.pontoHBG} />
-          <View style={estilosHBG.pontoHBG} />
-          <View style={estilosHBG.pontoAtivoHBG} />
+          <TouchableOpacity
+            style={styles.botao}
+            onPress={() => router.push('/login')}
+          >
+            <Text style={styles.textoBotao}>Começar</Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity style={estilosHBG.botaoHBG} onPress={() => routerHBG.push('/login')}>
-          <Text style={estilosHBG.textoBotaoHBG}>Começar</Text>
-        </TouchableOpacity>
-
-        <Image
-          source={require('../components/avatares/panda.png')}
-          style={estilosHBG.avatarRodapeHBG}
-          resizeMode="contain"
-        />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
-const estilosHBG = StyleSheet.create({
-  containerHBG: { flex: 1, backgroundColor: '#ecf0b8' },
-  areaImagemHBG: { flex: 1.3, justifyContent: 'center', alignItems: 'center' },
-  imagemHBG: { width: '100%', height: '100%', transform: [{ scale: 1.20 }] },
-  areaTextoHBG: { flex: 1, paddingHorizontal: 20, paddingTop: 24 },
-  tituloHBG: { color: '#1B3A6B', fontSize: 30, fontWeight: 'bold', marginBottom: 12, textAlign: 'center' },
-  subtituloHBG: { color: '#2F4D77', fontSize: 18, lineHeight: 22 },
-  pontosHBG: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical: 28 },
-  pontoHBG: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#7FA3CC', marginHorizontal: 3 },
-  pontoAtivoHBG: { width: 22, height: 6, borderRadius: 3, backgroundColor: '#F4C430', marginHorizontal: 3 },
-  botaoHBG: { backgroundColor: '#1F4E9C', borderRadius: 30, paddingVertical: 16, alignItems: 'center' },
-  textoBotaoHBG: { color: '#FFFFFF', fontSize: 16, fontWeight: 'bold' },
-  avatarRodapeHBG: { width: 80, height: 50, alignSelf: 'center', marginTop: 16 },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#3E2723',
+  },
+
+  conteudo: {
+    flex: 1,
+    backgroundColor: 'rgba(44, 24, 16, 0.55)',
+    justifyContent: 'flex-end',
+    paddingBottom: 40,
+  },
+
+  areaTexto: {
+    paddingHorizontal: 20,
+  },
+
+  titulo: {
+    color: '#FFF8F0',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+
+  subtitulo: {
+    color: '#EFEBE9',
+    fontSize: 16,
+    lineHeight: 22,
+    textAlign: 'center',
+  },
+
+  pontos: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+
+  ponto: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#D7CCC8',
+    marginHorizontal: 3,
+  },
+
+  pontoAtivo: {
+    width: 22,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#A1887F',
+    marginHorizontal: 3,
+  },
+
+  botao: {
+    backgroundColor: '#6D4C41',
+    borderRadius: 12,
+    paddingVertical: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#8D6E63',
+  },
+
+  textoBotao: {
+    color: '#FFF8F0',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
