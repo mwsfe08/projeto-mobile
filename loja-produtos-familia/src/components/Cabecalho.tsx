@@ -9,8 +9,8 @@ export default function Cabecalho({fotoPerfil}: PropsCabecalho) {
   return (
     <View style={styles.container}>
       <View style={styles.textos}>
-        <Text style={styles.titulo}>Bem-vindo de volta</Text>
-        <Text style={styles.subtitulo}>Descubra avatares</Text>
+        <Text style={styles.titulo}>Bem-vindo</Text>
+        <Text style={styles.subtitulo}>Veja os produtos</Text>
       </View>
 
       <Image source={{uri: fotoPerfil}} style={styles.foto} />

@@ -5,7 +5,7 @@ import {Text, StyleSheet, Image, TouchableOpacity, ImageSourcePropType, } from '
 type PropsCard = {
   imagem: ImageSourcePropType;
   nome: string;
-  preco: number;
+  preco: string;
   onPress?: () => void;
 };
 
@@ -24,7 +24,7 @@ export default function CardItemLoja({
       <Image
         source={imagem}
         style={styles.imagemCard}
-        resizeMode="contain"
+        resizeMode="cover"
       />
 
       <Text style={styles.textoCard} numberOfLines={1}>
@@ -32,7 +32,7 @@ export default function CardItemLoja({
       </Text>
 
       <Text style={styles.preco}>
-        {preco} moedas
+        {preco}
       </Text>
     </TouchableOpacity>
   );
@@ -41,30 +41,35 @@ export default function CardItemLoja({
 const styles = StyleSheet.create({
   container: {
     width: '48%',
-    padding: 10,
-    backgroundColor: '#100022',
+    height: 250,
+    backgroundColor: '#fff',
     gap: 6,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
 
   imagemCard: {
     width: '100%',
-    height: 130,
-    backgroundColor: '#1FB6E0',
+    height: '50%',
     borderRadius: 8,
   },
 
   textoCard: {
-    fontSize: 16,
+    height: '35%',
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   preco: {
+    height: '15%',
     fontSize: 14,
-    color: '#ffd900',
+    color: '#1a1919',
     fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

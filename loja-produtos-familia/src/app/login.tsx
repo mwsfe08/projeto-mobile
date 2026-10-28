@@ -40,7 +40,7 @@ function Cabecalho({ fotoPerfil }: { fotoPerfil?: string }) {
 export default function Login() {
   const router = useRouter();
 
-  const [emailCadastrado] = useState('');
+  const [emailCadastrado] = useState('email@gmail.com');
   const [senhaCadastrada] = useState('123456');
 
   const [email, setEmail] = useState('');
@@ -58,7 +58,7 @@ export default function Login() {
     }
 
     setErro('');
-    router.replace('/cardapio');
+    router.replace('/produtos');
   }
 
   return (
