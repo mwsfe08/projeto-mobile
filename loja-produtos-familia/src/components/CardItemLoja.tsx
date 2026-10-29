@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity, ImageSourcePropType, } from 'react-native';
+import { useFonts, Poppins_400Regular, } from '@expo-google-fonts/poppins';
 
 type PropsCard = {
   imagem: ImageSourcePropType;
@@ -15,6 +16,14 @@ export default function CardItemLoja({
   preco,
   onPress,
 }: PropsCard) {
+  
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <TouchableOpacity
       style={styles.container}
@@ -27,7 +36,7 @@ export default function CardItemLoja({
         resizeMode="cover"
       />
 
-      <Text style={styles.textoCard} numberOfLines={1}>
+      <Text style={styles.textoCard}>
         {nome}
       </Text>
 
@@ -43,33 +52,34 @@ const styles = StyleSheet.create({
     width: '48%',
     height: 250,
     backgroundColor: '#fff',
-    gap: 6,
-    //justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     borderRadius: 10,
   },
 
   imagemCard: {
     width: '100%',
-    height: '50%',
+    height: 135,
     borderRadius: 8,
   },
 
   textoCard: {
-    height: '35%',
-    fontSize: 18,
-    fontWeight: 'bold',
+    flex: 1,
+    paddingHorizontal: 6,
+    paddingTop: 8,
+    fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 
   preco: {
-    height: '15%',
-    fontSize: 14,
-    color: '#1a1919',
+    padding: 10,
+    fontSize: 20,
+    fontFamily: 'Poppins_400Regular',
+    color: '#ff4000',
     fontWeight: 'bold',
-    alignItems: 'center',
-    justifyContent: 'center',
+    textAlign: 'center',
   },
 });

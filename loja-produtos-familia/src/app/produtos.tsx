@@ -1,50 +1,14 @@
 import { useState } from 'react';
 import { View, StyleSheet, TextInput, FlatList, ImageBackground } from 'react-native';
+import { useRouter } from 'expo-router';
+import { produtos } from '../components/produtosDados';
 
 import Cabecalho from '../components/Cabecalho';
 import CardItemLoja from '../components/CardItemLoja';
 
-const produtos = [
-  {
-    id: '1',
-    imagem: require('../../assets/caixa-recordacoes.jpeg'),
-    nome: 'Caixa de recordações',
-    preco: 'R$ 79,90',
-  },
-  {
-    id: '2',
-    imagem: require('../../assets/quebra_cabeca.jpeg'),
-    nome: 'Quebra-cabeça',
-    preco: 'R$ 59,90',
-  },
-  {
-    id: '3',
-    imagem: require('../../assets/calendario.jpeg'),
-    nome: 'Calendário Familiar',
-    preco: 'R$ 39,90',
-  },
-  {
-    id: '4',
-    imagem: require('../../assets/album.jpeg'),
-    nome: 'Álbum de fotografias',
-    preco: 'R$ 89,90',
-  },
-  {
-    id: '5',
-    imagem: require('../../assets/arvore-genealogica.jpeg'),
-    nome: 'Árvore genealógica',
-    preco: 'R$ 49,90',
-  },
-  {
-    id: '6',
-    imagem: require('../../assets/caixa-memorias.jpeg'),
-    nome: 'Caixa de memórias',
-    preco: 'R$ 99,90',
-  },
-];
-
 export default function Produtos() {
   const [pesquisa, setPesquisa] = useState('');
+  const router = useRouter();
 
   const produtosFiltrados = produtos.filter((item) =>
     item.nome.toLowerCase().includes(pesquisa.trim().toLowerCase())
@@ -76,10 +40,13 @@ export default function Produtos() {
         contentContainerStyle={styles.lista}
         keyboardShouldPersistTaps="handled"
         renderItem={({ item }) => (
-          <CardItemLoja style={styles.card}
+          <CardItemLoja
             imagem={item.imagem}
             nome={item.nome}
             preco={item.preco}
+            onPress={() =>
+            router.push({ pathname: '/detalhes', params: { id: item.id },})
+          }
           />
         )}
       />
@@ -95,7 +62,7 @@ const styles = StyleSheet.create({
 
   conteudo: {
     flex: 1,
-    backgroundColor: '#e8c39e',
+    backgroundColor: '#f1d7bd',
   },
 
   containerPesquisa: {
@@ -124,6 +91,7 @@ const styles = StyleSheet.create({
 
   linha: {
     justifyContent: 'space-between',
+    marginBottom: 16,
   },
 
   
