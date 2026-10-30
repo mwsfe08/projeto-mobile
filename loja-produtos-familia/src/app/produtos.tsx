@@ -4,14 +4,14 @@ import { useRouter } from 'expo-router';
 import { produtos } from '../components/produtosDados';
 
 import Cabecalho from '../components/Cabecalho';
-import CardItemLoja from '../components/CardItemLoja';
+import CardProduto from '../components/CardProduto';
 
-export default function Produtos() {
-  const [pesquisa, setPesquisa] = useState('');
+export default function ProdutosLMS() {
+  const [pesquisaLMS, seiPesquisaLMS] = useState('');
   const router = useRouter();
 
-  const produtosFiltrados = produtos.filter((item) =>
-    item.nome.toLowerCase().includes(pesquisa.trim().toLowerCase())
+  const produtosFiltradosLMS = produtos.filter((item) =>
+    item.nome.toLowerCase().includes(pesquisaLMS.trim().toLowerCase())
   );
 
   return (
@@ -25,22 +25,22 @@ export default function Produtos() {
           style={styles.inputPesquisa}
           placeholder="Pesquisar produtos..."
           placeholderTextColor="#292727cb"
-          value={pesquisa}
-          onChangeText={setPesquisa}
+          value={pesquisaLMS}
+          onChangeText={seiPesquisaLMS}
           autoCapitalize="none"
           clearButtonMode="while-editing"
         />
       </View>
 
       <FlatList
-        data={produtosFiltrados}
+        data={produtosFiltradosLMS}
         keyExtractor={(item) => item.id}
         numColumns={2}
         columnWrapperStyle={styles.linha}
         contentContainerStyle={styles.lista}
         keyboardShouldPersistTaps="handled"
         renderItem={({ item }) => (
-          <CardItemLoja
+          <CardProduto
             imagem={item.imagem}
             nome={item.nome}
             preco={item.preco}

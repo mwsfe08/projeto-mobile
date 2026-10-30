@@ -10,12 +10,7 @@ type PropsCard = {
   onPress?: () => void;
 };
 
-export default function CardItemLoja({
-  imagem,
-  nome,
-  preco,
-  onPress,
-}: PropsCard) {
+export default function CardProduto({ imagem, nome, preco, onPress }: PropsCard) {
   
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,

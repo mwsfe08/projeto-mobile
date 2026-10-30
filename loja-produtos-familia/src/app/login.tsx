@@ -1,42 +1,9 @@
 import { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  Image,
-  ImageBackground,
-  StatusBar,
-} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image, ImageBackground, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
+import Entypo from '@expo/vector-icons/Entypo';
 
-const imagemFundoURL = {
-  uri: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop',
-};
-
-function Cabecalho({ fotoPerfil }: { fotoPerfil?: string }) {
-  return (
-    <View style={stylesCabecalho.container}>
-      <View style={stylesCabecalho.textoContainer}>
-        <Text style={stylesCabecalho.titulo}>Bem-vindo de volta</Text>
-        <Text style={stylesCabecalho.subtitulo}>
-          Eternize suas histórias de família
-        </Text>
-      </View>
-
-      <Image
-        source={{
-          uri:
-            fotoPerfil ||
-            'https://voxnews.com.br/wp-content/uploads/2017/04/unnamed-300x300.png',
-        }}
-        style={stylesCabecalho.fotoPerfil}
-      />
-    </View>
-  );
-}
-
+const imagemFundoURL = 'https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop'
 export default function Login() {
   const router = useRouter();
 
@@ -62,124 +29,75 @@ export default function Login() {
   }
 
   return (
-    <ImageBackground
-      source={imagemFundoURL}
-      style={styles.container}
-      resizeMode="cover"
-    >
-      <StatusBar barStyle="light-content" />
+    <View style={styles.containerLMS}>
+      <Text style={styles.titulo}>
+        Faça o seu login
+      </Text>
+      
+        <View style={styles.containerPesquisa}>
+          <Entypo style={styles.icone} name="lock" size={24}/>
 
-      <View style={styles.conteudo}>
-        <Cabecalho
-          fotoPerfil="https://voxnews.com.br/wp-content/uploads/2017/04/unnamed-300x300.png"
-        />
-
-        <View style={styles.areaFormulario}>
-          <View style={styles.containerPesquisa}>
-            <Image
-              style={styles.icone}
-              source={require('../../assets/images/Vector.png')}
-              resizeMode="cover"
-            />
-            <TextInput
-              style={styles.inputPesquisa}
-              placeholder="Email"
-              placeholderTextColor="#8C6D58"
-              value={email}
-              onChangeText={setEmail}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              clearButtonMode="while-editing"
-            />
-          </View>
-
-          <View style={styles.containerPesquisa}>
-            <Image
-              style={styles.icone}
-              source={require('../../assets/images/Lock.png')}
-              resizeMode="cover"
-            />
-            <TextInput
-              style={styles.inputPesquisa}
-              placeholder="Senha"
-              placeholderTextColor="#8C6D58"
-              value={senha}
-              onChangeText={setSenha}
-              secureTextEntry
-              clearButtonMode="while-editing"
-            />
-          </View>
-
-          {erro !== '' && <Text style={styles.erro}>{erro}</Text>}
-
-          <TouchableOpacity style={styles.botao} onPress={verificarLogin}>
-            <Text style={styles.textoBotao}>Entrar</Text>
-          </TouchableOpacity>
+          <TextInput
+            style={styles.inputPesquisa}
+            placeholder="Email"
+            placeholderTextColor="#8C6D58"
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            clearButtonMode="while-editing"
+          />
         </View>
-      </View>
-    </ImageBackground>
+
+        <View style={styles.containerPesquisa}>
+          <Entypo style={styles.icone} name="mail" size={24}/>
+
+          <TextInput
+            style={styles.inputPesquisa}
+            placeholder="Senha"
+            placeholderTextColor="#8C6D58"
+            value={senha}
+            onChangeText={setSenha}
+            secureTextEntry
+            clearButtonMode="while-editing"
+          />
+        </View>
+
+        {erro !== '' && <Text style={styles.erro}>{erro}</Text>}
+
+        <TouchableOpacity style={styles.botao} onPress={verificarLogin}>
+          <Text style={styles.textoBotao}>Entrar</Text>
+        </TouchableOpacity>
+      
+    </View>
   );
 }
 
-const stylesCabecalho = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 50,
-    paddingBottom: 16,
-    backgroundColor: 'transparent',
-  },
-
-  textoContainer: {
+const styles = StyleSheet.create({
+  containerLMS: {
     flex: 1,
+    backgroundImage: `url(${imagemFundoURL})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    justifyContent: 'center',
   },
 
   titulo: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFF8F0',
   },
 
-  subtitulo: {
-    fontSize: 14,
-    color: '#D7CCC8',
-    marginTop: 2,
-  },
-
-  fotoPerfil: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
-    borderWidth: 2,
-    borderColor: '#FFF8F0',
-  },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#3E2723',
-  },
-
-  conteudo: {
-    flex: 1,
-    backgroundColor: 'rgba(44, 24, 16, 0.55)',
-  },
-
-  areaFormulario: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingBottom: 40,
-  },
-
   containerPesquisa: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 16,
     marginTop: 12,
     marginBottom: 14,
+    gap: 10,
     backgroundColor: '#FFF8F0',
     borderRadius: 12,
     borderWidth: 1,
@@ -189,6 +107,8 @@ const styles = StyleSheet.create({
 
   inputPesquisa: {
     flex: 1,
+    outlineWidth: 0,
+    outlineStyle: 'dotted',
     height: 46,
     fontSize: 16,
     color: '#4A2E1B',
@@ -198,7 +118,9 @@ const styles = StyleSheet.create({
   icone: {
     width: 20,
     height: 20,
-    tintColor: '#6D4C41',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#6D4C41',
   },
 
   erro: {
